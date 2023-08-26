@@ -5,7 +5,12 @@ const hotelSchema = Schema({
     type: String,
     required: [true, "El nombre es requerido"],
   },
-  address: {
+  email: {
+    type: String,
+    required: [true, "El correo es requerido"],
+    unique: true,
+  },
+  phone: {
     type: String,
     required: true,
   },
