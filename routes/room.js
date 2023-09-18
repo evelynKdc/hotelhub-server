@@ -1,15 +1,15 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
-const { fieldValidator } = require("../middlewares/validator"); 
-const { createRoom, getRooms, getRoomsById } = require("../controller/roomC");
+const { fieldValidator } = require("../middlewares/validator");
+const { createRoom, getRooms, getRoomsById, getRoomsFilterByDateRange } = require("../controller/roomC");
 const router = Router();
 
-
 router.get("/", getRooms);
-router.get("/:id", [
-  check("id", "Is a mongo id not valid").isMongoId(),
-  fieldValidator
-] ,getRoomsById);
+router.get(
+  "/:id",
+  [check("id", "Is a mongo id not valid").isMongoId(), fieldValidator],
+  getRoomsById
+);
 router.post(
   "/",
   [
@@ -29,4 +29,15 @@ router.post(
 );
 //aun faltan mas rutas get, update, delete
 
+router.post(
+  "/filter/dates",
+  [
+    check("startDate", "Es necesario enviar el dia de comienzo")
+      .not()
+      .isEmpty(),
+    check("endDate", "Es necesario enviar el dia de termino").not().isEmpty(),
+    fieldValidator,
+  ],
+  getRoomsFilterByDateRange
+);
 module.exports = router;
