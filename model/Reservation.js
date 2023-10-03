@@ -38,4 +38,4 @@ const reservationSchema = Schema({
   },
 });
 
-module.exports = model("Categorie", reservationSchema);
+module.exports = model("Reservation", reservationSchema);

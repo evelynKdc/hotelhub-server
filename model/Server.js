@@ -7,6 +7,8 @@ const categorieRouter = require("../routes/categorie");
 const hotelRouter = require("../routes/hotel");
 const amenitieRouter = require("../routes/amenitie");
 const roomRouter = require("../routes/room");
+const userRouter = require("../routes/user");
+const reservationRouter = require("../routes/reservation");
 class Server {
   constructor() {
     this.app = express();
@@ -19,7 +21,7 @@ class Server {
       hotel: "/api/hotel",
       amenitite: "/api/amenitie",
       room: "/api/room",
-
+      reservation: "/api/reservation",
  
     };
     this.connectDb();
@@ -46,6 +48,8 @@ class Server {
     this.app.use(this.path.hotel, hotelRouter);
     this.app.use(this.path.amenitite, amenitieRouter);
     this.app.use(this.path.room, roomRouter);
+    this.app.use(this.path.users, userRouter);
+    this.app.use(this.path.reservation, reservationRouter);
   }
 
   listen() {
